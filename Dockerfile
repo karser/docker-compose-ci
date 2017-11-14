@@ -11,6 +11,6 @@ RUN apk add --update --no-cache \
     python-dev \
     && rm -rf /var/cache/apk/* \
     && pip install docker-compose \
-    && adduser -D -u ${PUID} -G ping nonroot
+    && adduser -D -u ${PUID} -G ping -h /home/nonroot nonroot
 
 USER nonroot
