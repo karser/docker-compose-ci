@@ -1,2 +1,8 @@
 # docker-compose-ci
-latest docker-compose that running on behalf of non-root user
+CI image which includes docker-compose that running on behalf of non-root user
+
+
+### build
+```
+docker build -t docker-compose-ci .
+```

@@ -1,22 +1,34 @@
-FROM docker:latest
+FROM docker:stable
 
 ARG PUID=1000
-ARG DOCKER_MACHINE_VERSION=v0.13.0
+ARG DOCKER_MACHINE_VERSION=v0.16.2
+ARG DOCKER_COMPOSE_VERSION=1.24.1
 
 RUN apk --no-cache add \
-    bash \
-    curl \
-    jq \
-    git \
-    openssh-client \
-    python \
-    py-pip \
-    python-dev \
-    && pip install docker-compose awscli \
-    && aws --version \
-    && curl -L https://github.com/docker/machine/releases/download/${DOCKER_MACHINE_VERSION}/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine \
-    && chmod +x /tmp/docker-machine && cp /tmp/docker-machine /usr/local/bin/docker-machine \
+        bash \
+        curl \
+        jq \
+        git \
+        make \
+        openssh-client \
+        python \
+        py-pip \
+        py-paramiko \
+        python-dev \
+        rsync \
+    \
+    && pip install --quiet \
+        docker-compose==${DOCKER_COMPOSE_VERSION} \
+        awscli \
+    \
+    && curl -sL https://github.com/docker/machine/releases/download/${DOCKER_MACHINE_VERSION}/docker-machine-`uname -s`-`uname -m` -o /usr/local/bin/docker-machine \
+    && chmod +x /usr/local/bin/docker-machine \
+    \
+    && adduser -D -u ${PUID} -G ping -h /home/nonroot nonroot \
+    \
+    && docker --version \
     && docker-machine --version \
-    && adduser -D -u ${PUID} -G ping -h /home/nonroot nonroot
+    && docker-compose --version \
+    && aws --version
 
 USER nonroot
