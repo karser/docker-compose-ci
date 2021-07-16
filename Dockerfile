@@ -1,8 +1,9 @@
-FROM docker:stable
+ARG DOCKER_VERSION=latest
+FROM docker:$DOCKER_VERSION
 
 ARG PUID=1000
 ARG DOCKER_MACHINE_VERSION=v0.16.2
-ARG DOCKER_COMPOSE_VERSION=1.24.1
+ARG DOCKER_COMPOSE_VERSION=1.27.2
 
 RUN apk --no-cache add \
         bash \
@@ -11,10 +12,10 @@ RUN apk --no-cache add \
         git \
         make \
         openssh-client \
-        python \
+        python3 \
         py-pip \
         py-paramiko \
-        python-dev \
+        python3-dev \
         rsync \
     \
     && pip install --quiet \
@@ -43,6 +44,7 @@ RUN apk --no-cache --update add \
         php7-curl \
         php7-gd \
         php7-gmp \
+        php7-fileinfo \
         php7-iconv \
         php7-imagick \
         php7-intl \
@@ -55,10 +57,13 @@ RUN apk --no-cache --update add \
         php7-phar \
         php7-phpdbg \
         php7-session \
+        php7-simplexml \
         php7-soap \
         php7-sysvsem \
+        php7-tokenizer \
         php7-xml \
         php7-xmlreader \
+        php7-xmlwriter \
         php7-zip \
         php7-zlib \
     && php -v
