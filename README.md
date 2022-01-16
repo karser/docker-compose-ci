@@ -12,6 +12,6 @@ docker build -t docker-compose-ci \
     --tag karser/docker-compose-ci:latest \
     --tag karser/docker-compose-ci:$DOCKER_VERSION .
 
-docker push karser/docker-compose-ci:$DOCKER_VERSION
+docker push karser/docker-compose-ci:$DOCKER_VERSION; \
 docker push karser/docker-compose-ci:latest
 ```

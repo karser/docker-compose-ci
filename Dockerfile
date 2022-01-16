@@ -17,6 +17,7 @@ RUN apk --no-cache add \
         py-paramiko \
         python3-dev \
         rsync \
+        subversion \
     \
     && pip install --quiet \
         docker-compose==${DOCKER_COMPOSE_VERSION} \
